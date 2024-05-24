@@ -1,5 +1,4 @@
 name: Docker Hub Pipeline
-run-name: Building ${{ github.ref_name }}
 
 on:
   workflow_call:
@@ -11,7 +10,7 @@ on:
 
 jobs:
   build-and-publish:
-    name: Build and Publish
+    name: Build ${{ github.ref_name }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
