@@ -19,7 +19,7 @@ jobs:
       java-dist: 'temurin'
 
     steps:
-      - name: Checking out ${{ github.repository }}
+      - name: Checking out ${{ github.repository }}@${{ github.ref_name }}
         uses: actions/checkout@v4
 
       - name: Setting up Java ${{ env.java-version }}
