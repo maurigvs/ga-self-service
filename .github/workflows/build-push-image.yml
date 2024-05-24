@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-publish:
-    name: Build ${{ github.ref_name }}
+    name: ${{ github.ref_name }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -19,7 +19,7 @@ jobs:
       java-dist: 'temurin'
 
     steps:
-      - name: Checking out ${{ github.repository }}@${{ github.ref_name }}
+      - name: Checking out ${{ github.repository }}
         uses: actions/checkout@v4
 
       - name: Setting up Java ${{ env.java-version }}
