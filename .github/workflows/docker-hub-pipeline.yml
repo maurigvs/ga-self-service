@@ -19,7 +19,7 @@ jobs:
       cache_type: 'gradle'
 
   push-image:
-    if: ${{ github.ref_name == 'breaking-docker-pipeline' }}
+    needs: build-and-test
     uses: maurigvs/ga-self-service/.github/workflows/push-image.yml@breaking-docker-pipeline
     with:
       java_version: '17'
