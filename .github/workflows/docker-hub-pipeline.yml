@@ -10,24 +10,19 @@ on:
         description: 'Docker Hub access token'
         required: true
 
-env:
-  JAVA_VERSION: '17'
-  JAVA_DIST: 'temurin'
-  CACHE_TYPE: 'gradle'
-
 jobs:
   build-and-test:
     uses: maurigvs/ga-self-service/.github/workflows/build-and-test.yml@breaking-docker-pipeline
     with:
-      java_version: ${{ env.JAVA_VERSION }}
-      java_distribution: ${{ env.JAVA_DIST }}
-      cache_type: ${{ env.CACHE_TYPE }}
+      java_version: '17'
+      java_distribution: 'temurin'
+      cache_type: 'gradle'
 
   push-image:
     if: ${{ github.ref_name == 'breaking-docker-pipeline' }}
     uses: maurigvs/ga-self-service/.github/workflows/push-image.yml@breaking-docker-pipeline
     with:
-      java_version: ${{ env.JAVA_VERSION }}
-      java_distribution: ${{ env.JAVA_DIST }}
-      cache_type: ${{ env.CACHE_TYPE }}
+      java_version: '17'
+      java_distribution: 'temurin'
+      cache_type: 'gradle'
     secrets: inherit
