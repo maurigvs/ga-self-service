@@ -16,10 +16,6 @@ env:
   CACHE_TYPE: 'gradle'
 
 jobs:
-  generate-tag:
-    if: ${{ github.ref_name == 'reusing-tag-generator' }}
-    uses: maurigvs/ga-self-service/.github/workflows/tag-generator.yml@reusing-tag-generator
-
   build-and-test:
     name: Build and Test
     runs-on: ubuntu-latest
@@ -40,8 +36,13 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build --no-daemon --console plain
 
+  generate-tag:
+    if: ${{ github.ref_name == 'reusing-tag-generator' }}
+    needs: build-and-test
+    uses: maurigvs/ga-self-service/.github/workflows/tag-generator.yml@reusing-tag-generator
+
   push-image:
-    needs: [generate-tag, build-and-test]
+    needs: [ build-and-test, generate-tag ]
     name: Push Image
     runs-on: ubuntu-latest
     env:
