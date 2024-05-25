@@ -28,8 +28,8 @@ jobs:
       - name: Setting up Java ${{ env.java-version }}
         uses: actions/setup-java@v4
         with:
-          java-version: ${{ env.java-version }}
-          distribution: ${{ env.java-dist }}
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DIST }}
           cache: 'gradle'
 
       - name: Setting up Gradle
