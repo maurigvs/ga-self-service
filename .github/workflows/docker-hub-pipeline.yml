@@ -36,14 +36,17 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build --no-daemon --console plain
 
-  push-image:
+  generate-tag:
     if: ${{ github.ref_name == 'master' }}
-    needs: build-and-test
+    uses: maurigvs/ga-self-service/.github/workflows/tag-generator.yml@master
+
+  push-image:
+    needs: [ build-and-test, generate-tag ]
     name: Push Image
     runs-on: ubuntu-latest
     env:
       REGISTRY: 'docker.io'
-      IMAGE_TAG: ${{ github.repository }}:latest
+      IMAGE_TAG: ${{ github.repository }}:${{ needs.generate-tag.outputs.tag }}
 
     steps:
       - name: Checking out ${{ github.repository }}
