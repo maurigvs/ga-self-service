@@ -12,6 +12,7 @@ on:
 
 jobs:
   publisher:
+    name: Builder
     runs-on: ubuntu-latest
     permissions:
       contents: read
