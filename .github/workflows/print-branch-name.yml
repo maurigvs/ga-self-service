@@ -1,18 +1,16 @@
-name: Task Id Printer
+name: Tag Printer
 on: workflow_call
-
 jobs:
-  task-id-printer:
+  task-printer:
     runs-on: ubuntu-latest
-    outputs:
-      task-id: ${{ steps.printer.outputs.task-id }}
     steps:
       - id: tag-printer
         run: |
           BRANCH_NAME=${{ github.ref_name }}
           SUBSTRING=${BRANCH_NAME:8:6}
           echo "tag=$SUBSTRING" >> "$GITHUB_OUTPUT"
+
       - id: tag-reader
         run:
-          TAG=${{ github.outputs.tag }}
+          TAG=${{ steps.tag-printer.outputs.tag }}
           echo "$TAG"
