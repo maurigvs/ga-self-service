@@ -37,13 +37,12 @@ jobs:
         run: ./gradlew build --no-daemon --console plain
 
   generate-tag:
+    needs: build-and-test
     if: ${{ github.ref_name == 'reusing-tag-generator' }}
     uses: maurigvs/ga-self-service/.github/workflows/tag-generator.yml@reusing-tag-generator
 
   push-image:
-    needs:
-      - generating-tag
-
+    needs: generating-tag
     name: Push Image
     runs-on: ubuntu-latest
     env:
