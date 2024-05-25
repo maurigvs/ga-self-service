@@ -10,7 +10,8 @@ jobs:
     outputs:
       tag: ${{ steps.generator.outputs.tag }}
     steps:
-      - id: generator
+      - name: Defining tag for branch ${{ github.ref_name }}
+        id: generator
         run: |
           BRANCH_NAME=${{ github.ref_name }}
           SUBSTRING=${BRANCH_NAME:0:4}
