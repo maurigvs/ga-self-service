@@ -6,6 +6,7 @@ on:
         value: ${{ jobs.generator.outputs.tag }}
 jobs:
   generator:
+    name: Generate Tag
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.generator.outputs.tag }}
