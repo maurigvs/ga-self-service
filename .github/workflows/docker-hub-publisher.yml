@@ -37,7 +37,7 @@ jobs:
         run: ./gradlew build --no-daemon --console plain
 
   push-image:
-    if: ${{ github.ref_name == 'improving-workflows' }}
+    if: ${{ github.ref_name == 'master' }}
     needs: build-and-test
     name: Push Image
     runs-on: ubuntu-latest
