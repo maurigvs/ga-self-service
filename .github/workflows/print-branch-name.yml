@@ -19,4 +19,6 @@ jobs:
 
       - id: read-tag
         name: Read the tag
-        run: echo ${{ steps.print-tag.outputs.tag }}
+        env:
+          TAG: maestro-${{ steps.print-tag.outputs.tag }}
+        run: echo ${{ env.TAG }}
