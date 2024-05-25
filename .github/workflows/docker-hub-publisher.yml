@@ -14,7 +14,6 @@ env:
   JAVA_VERSION: '17'
   JAVA_DIST: 'temurin'
   CACHE_TYPE: 'gradle'
-  MASTER_BRANCH: ${{ github.ref_name == 'reusing-tag-generator' }}
 
 jobs:
   build-and-test:
@@ -38,7 +37,7 @@ jobs:
         run: ./gradlew build --no-daemon --console plain
 
   generate-tag:
-    if: ${{ env.MASTER_BRANCH == 'true' }}
+    if: ${{ github.ref_name == 'reusing-tag-generator' }}
     uses: maurigvs/ga-self-service/.github/workflows/tag-generator.yml@reusing-tag-generator
 
   push-image:
