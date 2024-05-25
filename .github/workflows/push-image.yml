@@ -1,5 +1,6 @@
 on:
   workflow_call:
+    branches: master
     inputs:
       java_version:
         description: 'Java version to use'
@@ -22,10 +23,6 @@ on:
         required: true
 
 jobs:
-  generate-tag:
-    if: ${{ github.ref_name == 'master' }}
-    uses: maurigvs/ga-self-service/.github/workflows/generate-tag.yml@main
-
   push-image:
     needs: generate-tag
     name: Push Image
@@ -33,7 +30,7 @@ jobs:
 
     env:
       REGISTRY: 'docker.io'
-      IMAGE_TAG: ${{ github.repository }}:${{ needs.generate-tag.outputs.tag }}
+      IMAGE_TAG: ${{ github.repository }}:latest
 
     steps:
       - name: Checking out ${{ github.repository }}
