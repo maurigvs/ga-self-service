@@ -15,7 +15,7 @@ jobs:
     name: Build and Push
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
     env:
       java-version: '17'
       java-dist: 'temurin'
