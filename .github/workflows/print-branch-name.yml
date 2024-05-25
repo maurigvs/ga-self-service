@@ -9,6 +9,8 @@ jobs:
   tag-printer:
     name: Tag Printer
     runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.print-tag.outputs.tag }}
     steps:
       - id: print-tag
         name: Print the tag
@@ -17,8 +19,13 @@ jobs:
           SUBSTRING=${BRANCH_NAME:16:4}
           echo "tag=$SUBSTRING" >> "$GITHUB_OUTPUT"
 
+  tag-reader:
+    needs: tag-printer
+    name: Tag Reader
+    runs-on: ubuntu-latest
+    env:
+      tag: ${{ needs.tag-printer.outputs.tag }}
+    steps:
       - id: read-tag
         name: Read the tag
-        env:
-          TAG: maestro-${{ steps.print-tag.outputs.tag }}
-        run: echo ${{ env.TAG }}
+        run: echo "maestro-${{ env.tag }}"
