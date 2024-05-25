@@ -58,7 +58,7 @@ jobs:
         with:
           java-version: ${{ env.java-version }}
           distribution: ${{ env.java-dist }}
-          cache-from: type=gradle,dir=gradle
+          cache: 'gradle'
 
       - name: Setting up Gradle
         uses: gradle/actions/setup-gradle@v3
