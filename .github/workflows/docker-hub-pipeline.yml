@@ -20,6 +20,7 @@ jobs:
 
   push-image:
     needs: build-and-test
+    if: ${{ github.ref_name == 'master' }}
     uses: maurigvs/ga-self-service/.github/workflows/push-image.yml@main
     with:
       java_version: '17'

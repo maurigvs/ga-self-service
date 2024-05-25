@@ -1,6 +1,5 @@
 on:
   workflow_call:
-    branches: master
     inputs:
       java_version:
         description: 'Java version to use'
@@ -24,7 +23,6 @@ on:
 
 jobs:
   push-image:
-    needs: generate-tag
     name: Push Image
     runs-on: ubuntu-latest
 
