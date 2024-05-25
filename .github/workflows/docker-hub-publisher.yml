@@ -42,11 +42,11 @@ jobs:
         run: ./gradlew build
 
       - name: Set up Docker Buildx
-        if: ${{ env.master-branch == true }}
+        if: ${{ env.master-branch == 'true' }}
         uses: docker/setup-buildx-action@v3
 
       - name: Log in ${{ env.registry }}
-        if: ${{ env.master-branch == true }}
+        if: ${{ env.master-branch == 'true' }}
         uses: docker/login-action@v3
         with:
           registry: ${{ env.registry }}
@@ -54,7 +54,7 @@ jobs:
           password: ${{ secrets.TOKEN }}
 
       - name: Docker build and push image
-        if: ${{ env.master-branch == true }}
+        if: ${{ env.master-branch == 'true' }}
         uses: docker/build-push-action@v5
         with:
           context: .
