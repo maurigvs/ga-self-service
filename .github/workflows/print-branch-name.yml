@@ -1,5 +1,5 @@
 name: Tag Printer
-on: workflow_call
+on: workflow_dispatch
 jobs:
   task-printer:
     runs-on: ubuntu-latest
