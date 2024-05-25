@@ -1,14 +1,11 @@
-name: Tag Generator
 on:
   workflow_call:
     outputs:
       tag:
         description: 'The tag to be used'
         value: ${{ jobs.generator.outputs.tag }}
-
 jobs:
   generator:
-    name: Generate Tag
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.generator.outputs.tag }}
