@@ -23,8 +23,8 @@ on:
 
 jobs:
   generate-tag:
-    if: ${{ github.ref_name == 'breaking-docker-pipeline' }}
-    uses: maurigvs/ga-self-service/.github/workflows/tag-generator.yml@breaking-docker-pipeline
+    if: ${{ github.ref_name == 'master' }}
+    uses: maurigvs/ga-self-service/.github/workflows/generate-tag.yml@main
 
   push-image:
     needs: generate-tag

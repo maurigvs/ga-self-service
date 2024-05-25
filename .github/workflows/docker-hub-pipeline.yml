@@ -12,7 +12,7 @@ on:
 
 jobs:
   build-and-test:
-    uses: maurigvs/ga-self-service/.github/workflows/build-and-test.yml@breaking-docker-pipeline
+    uses: maurigvs/ga-self-service/.github/workflows/build-and-test.yml@main
     with:
       java_version: '17'
       java_distribution: 'temurin'
@@ -20,7 +20,7 @@ jobs:
 
   push-image:
     needs: build-and-test
-    uses: maurigvs/ga-self-service/.github/workflows/push-image.yml@breaking-docker-pipeline
+    uses: maurigvs/ga-self-service/.github/workflows/push-image.yml@main
     with:
       java_version: '17'
       java_distribution: 'temurin'
