@@ -38,12 +38,12 @@ jobs:
       - name: Checking out ${{ github.repository }}
         uses: actions/checkout@v4
 
-      - name: Setting up Java ${{ env.JAVA_VERSION }}
+      - name: Setting up Java ${{ inputs.java_version }}
         uses: actions/setup-java@v4
         with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: ${{ env.JAVA_DIST }}
-          cache: ${{ env.CACHE_TYPE }}
+          java-version: ${{ inputs.java_version }}
+          distribution: ${{ inputs.java_distribution }}
+          cache: ${{ inputs.cache_type }}
 
       - name: Building application
         run: ./gradlew bootJar --no-daemon
