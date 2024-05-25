@@ -1,12 +1,8 @@
 name: Tag Generator
-
-on:
-  push:
-    branches:
-      - feature/MAESTRO-5595-habemus-github
+on: [ workflow_call, workflow_dispatch ]
 
 jobs:
-  tag-printer:
+  printer:
     name: Tag Printer
     runs-on: ubuntu-latest
     outputs:
@@ -19,12 +15,12 @@ jobs:
           SUBSTRING=${BRANCH_NAME:16:4}
           echo "tag=$SUBSTRING" >> "$GITHUB_OUTPUT"
 
-  tag-reader:
-    needs: tag-printer
+  reader:
+    needs: printer
     name: Tag Reader
     runs-on: ubuntu-latest
     env:
-      tag: ${{ needs.tag-printer.outputs.tag }}
+      tag: ${{ needs.printer.outputs.tag }}
     steps:
       - id: read-tag
         name: Read the tag
