@@ -33,11 +33,6 @@ jobs:
           distribution: ${{ env.JAVA_DIST }}
           cache: ${{ env.CACHE_TYPE }}
 
-      - name: Setting up Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          dependency-graph: generate-and-submit
-
       - name: Build with Gradle
         run: ./gradlew build --no-daemon --console plain
 
