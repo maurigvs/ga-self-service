@@ -38,7 +38,6 @@ jobs:
 
   generate-tag:
     if: ${{ github.ref_name == 'reusing-tag-generator' }}
-    needs: build-and-test
     uses: maurigvs/ga-self-service/.github/workflows/tag-generator.yml@reusing-tag-generator
 
   push-image:
