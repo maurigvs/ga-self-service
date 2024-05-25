@@ -1,0 +1,27 @@
+name: Tag Generator
+on: [ workflow_call, workflow_dispatch ]
+
+jobs:
+  printer:
+    name: Tag Printer
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.print-tag.outputs.tag }}
+    steps:
+      - id: print-tag
+        name: Print the tag
+        run: |
+          BRANCH_NAME=${{ github.ref_name }}
+          SUBSTRING=${BRANCH_NAME:16:4}
+          echo "tag=$SUBSTRING" >> "$GITHUB_OUTPUT"
+
+  reader:
+    needs: printer
+    name: Tag Reader
+    runs-on: ubuntu-latest
+    env:
+      tag: ${{ needs.printer.outputs.tag }}
+    steps:
+      - id: read-tag
+        name: Read the tag
+        run: echo "maestro-${{ env.tag }}"
