@@ -13,6 +13,7 @@ on:
 env:
   JAVA_VERSION: '17'
   JAVA_DIST: 'temurin'
+  CACHE_TYPE: 'gradle'
 
 jobs:
   build-and-test:
@@ -25,12 +26,12 @@ jobs:
       - name: Checking out ${{ github.repository }}
         uses: actions/checkout@v4
 
-      - name: Setting up Java ${{ env.java-version }}
+      - name: Setting up Java ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: ${{ env.JAVA_DIST }}
-          cache: 'gradle'
+          cache: ${{ env.CACHE_TYPE }}
 
       - name: Setting up Gradle
         uses: gradle/actions/setup-gradle@v3
@@ -53,12 +54,12 @@ jobs:
       - name: Checking out ${{ github.repository }}
         uses: actions/checkout@v4
 
-      - name: Setting up Java ${{ env.java-version }}
+      - name: Setting up Java ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v4
         with:
-          java-version: ${{ env.java-version }}
-          distribution: ${{ env.java-dist }}
-          cache: 'gradle'
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DIST }}
+          cache: ${{ env.CACHE_TYPE }}
 
       - name: Setting up Gradle
         uses: gradle/actions/setup-gradle@v3
