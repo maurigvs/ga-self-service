@@ -16,7 +16,7 @@ jobs:
     permissions:
       contents: read
     env:
-      is-master-branch: ${{ github.ref_name == env.master-branch }}
+      is-master-branch: ${{ github.ref_name == 'master' }}
       java-version: '17'
       java-dist: 'temurin'
       registry: 'docker.io'
