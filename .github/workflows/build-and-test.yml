@@ -1,0 +1,37 @@
+on:
+  workflow_call:
+    inputs:
+      java_version:
+        description: 'Java version to use'
+        type: string
+        required: true
+      java_distribution:
+        description: 'Java distribution to use'
+        type: string
+        required: true
+      cache_type:
+        description: 'Cache type to use'
+        type: string
+        required: true
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checking out ${{ github.repository }}
+        uses: actions/checkout@v4
+
+      - name: Setting up Java ${{ inputs.java_version }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ inputs.java_version }}
+          distribution: ${{ inputs.java_distribution }}
+          cache: ${{ inputs.cache_type }}
+
+      - name: Build with Gradle
+        run: ./gradlew build --no-daemon --console plain
