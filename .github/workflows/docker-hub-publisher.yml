@@ -14,6 +14,7 @@ env:
   JAVA_VERSION: '17'
   JAVA_DIST: 'temurin'
   CACHE_TYPE: 'gradle'
+  MASTER_BRANCH: ${{ github.ref_name == 'master' }}
 
 jobs:
   build-and-test:
@@ -36,14 +37,19 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build --no-daemon --console plain
 
+  generate-tag:
+    if: ${{ env.MASTER_BRANCH == 'true' }}
+    uses: maurigvs/ga-self-service/.github/workflows/tag-generator.yml@reusing-tag-generator
+
   push-image:
-    if: ${{ github.ref_name == 'master' }}
-    needs: build-and-test
+    needs:
+      - generating-tag
+
     name: Push Image
     runs-on: ubuntu-latest
     env:
       REGISTRY: 'docker.io'
-      IMAGE_TAG: ${{ github.repository }}:latest
+      IMAGE_TAG: ${{ github.repository }}:${{ needs.generate-tag.outputs.tag }}
 
     steps:
       - name: Checking out ${{ github.repository }}
