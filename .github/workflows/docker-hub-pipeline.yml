@@ -23,11 +23,8 @@ jobs:
       java_distribution: ${{ env.JAVA_DIST }}
       cache_type: ${{ env.CACHE_TYPE }}
 
-  generate-tag:
-    if: ${{ github.ref_name == 'breaking-docker-pipeline' }}
-    uses: maurigvs/ga-self-service/.github/workflows/tag-generator.yml@main
-
   push-image:
+    if: ${{ github.ref_name == 'breaking-docker-pipeline' }}
     uses: maurigvs/ga-self-service/.github/workflows/push-image.yml@breaking-docker-pipeline
     with:
       java_version: ${{ env.JAVA_VERSION }}
