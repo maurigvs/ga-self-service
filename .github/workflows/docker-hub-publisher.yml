@@ -27,9 +27,6 @@ jobs:
       - name: Checking out ${{ github.repository }}
         uses: actions/checkout@v4
 
-      - name: Generate tag
-        uses: maurigvs/ga-self-service/.github/actions/tag-generator@main
-
       - name: Setting up Java ${{ env.java-version }}
         uses: actions/setup-java@v4
         with:
