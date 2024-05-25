@@ -38,7 +38,7 @@ jobs:
 
   generate-tag:
     if: ${{ github.ref_name == 'master' }}
-    uses: maurigvs/ga-self-service/.github/workflows/tag-generator.yml@master
+    uses: maurigvs/ga-self-service/.github/workflows/tag-generator.yml@main
 
   push-image:
     needs: [ build-and-test, generate-tag ]
