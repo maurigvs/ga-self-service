@@ -56,10 +56,7 @@ jobs:
           distribution: ${{ env.JAVA_DIST }}
           cache: ${{ env.CACHE_TYPE }}
 
-      - name: Setting up Gradle
-        uses: gradle/actions/setup-gradle@v3
-
-      - name: Build application
+      - name: Building application
         run: ./gradlew build --no-daemon --console plain -x test
 
       - name: Setting up Docker Buildx
@@ -72,7 +69,7 @@ jobs:
           username: ${{ secrets.USER }}
           password: ${{ secrets.TOKEN }}
 
-      - name: Build and Push image
+      - name: Building image and pushing to ${{ env.REGISTRY }}
         uses: docker/build-push-action@v5
         with:
           context: .
